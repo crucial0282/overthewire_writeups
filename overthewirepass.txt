@@ -1,4 +1,9 @@
+--------------Completed till Level 24--------------------
+
+For login we use: ssh bandit0@bandit.labs.overthewire.org -p 2220
 Port: 2220
+
+
 
 bandit0: bandit0 
 bandit1: ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If 
