@@ -1,0 +1,69 @@
+Port: 2220
+
+bandit0: bandit0 
+bandit1: ZjLjTmM6FvvyRnrb2rfNWOZOTa6ip5If 
+bandit2: 263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+bandit3: MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+bandit4: 2WmrDFRmJIq3IPxneAaMGhap0pFhF3NJ
+bandit5: 4oQYVPkxZOOEOO5pTW81FB8j8lxXGUQw
+bandit6: HWasnPhtq9AVKe0dmk45nxy20cvUa6EG
+bandit7: morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj
+bandit8: dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc
+bandit9: 4CKMh1JI91bUIZZPXDqGanal4xvAg0JM	cat data.txt | strings -e s | grep ==
+
+bandit10: FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey	base64 -d data.txt , (decrypting to base64)
+
+bandit11: dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr	tr 'A-Za-z' 'N-ZA-Mn-za-m' < data.txt
+
+bandit12: 7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4	gunzip <filenmae> , bunzip2 , tar -xf <filename>
+						make sure to change gunzip extension to "gz" using "mv" , file <filename> to check for filetype
+
+bandit13: FO5dwFsc0cbaIiH0h8J2eUks2vdTDwAn	used ssh private key to connect to machine, ssh -i <key> -p <port> bandit14@localhost
+						this establishes the remote connection
+						--------------Alternate------------------
+						see the path of file
+						scp -P 2220 bandit13@bandit.labs.overthewire.org:sshkey.private .
+						type password of bandit13 and you will download the sshkey.private fie
+						after that we can give it perms chmod 700 sshkey.private
+						ssh -i sshkey.private bandit14@bandit.labs.overthewire.org -p 2220
+
+bandit14: MU4VWeTyJk8ROof1qqmcBPaLh7lDCPvS   	netcat localhost 30000 , this command revealed the password
+
+bandit15: 8xCjnmgoKbGLhHFAZlGE5Tmu4M2tKJQo	openssl s_client -connect localhost:30001 , this command revealed the password	
+
+bandit16: kSkvUpMQ7lBYyCM4GBPvCvT1BfWRy0Dx	nmap -sV -T4 -p 31000-32000 localhost , openssl s_client -quiet -connect localhost:31790 , 
+						made a file private file "ssh17.private" , touch ssh17.private , cat > ssh17.private (Input text and CTLR + D) 
+						ssh -i ssh17.private bandit17@bandit.labs.overthewire.org -p 2220
+
+bandit17: EReVavePLFHtFlFsjn3hyzMlvSuSAcRD	diff passwords.old passwords.new
+
+bandit18: x2gLTTjFwMOhQ8oWNbMN362QKxfRqGlO	since someone changed the .bashrc file , we were getting byebye msg, so we use 
+						ssh -t bandit18@bandit.labs.overthewire.org -p 2220 /bin/sh , this opens a pseudo terminal,
+						then we use "ls" and after that "cat readme" command
+
+bandit19: cGWpMaKXVwDUNgPAVJbWYuGHVn9zl3j8	setuid file, is a special type of permission in Unix/Linux systems that allows a user to run an 
+						executable with the permissions of the file owner, rather than the user who is running it.
+						check using "ls -l bandit20-do" , -rws means its a setuid file, ./bandit20-do id , bandit20 is
+						in the list so use ./bandit20-do cat /etc/bandit_pass/bandit20 
+
+bandit20: 0qXahG8ZjOVMN9Ghs7iOWsCfZyXOUbYO	again we have a setuid file "suconnect" , run a program in background that gives the pass of level 20
+						echo "GbKksEFF4yrVs6il55v6gwY5aVje5f0j" | netcat -lp 1234 & , -l is used to setup listner and "p" is 
+						used for port, we can check it using "jobs" , "./suconnect 4234" is used to connect on same port
+
+bandit21: EeoULMCra2q0dSkYj561DX7s1CpBuOBt	used cat command 2-3 times since I was able to see the file location.
+
+bandit22: tRae0UfB9v0UzbCdn9cY0gQnds9GF58Q	used cat command , then analyzed the code and used it to find the name of file	
+
+bandit23: 0Zf11ioIjMVN551jX3CmStKLYqjk54Ga	create a shell-script, then used it to execute a command where we will be copying the pass 
+						from bandit24 file to our password file, , then after that run this cp /tmp/cronjob.sh /var/spool/bandit24/foo
+						cp [source][directory], now type "cat /tmp/password" and password will be revealed cozz the script we wrote 
+						will automatically run in 60 sec.
+
+bandit24: gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8	
+
+
+
+
+
+
+
